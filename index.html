@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>STP Operator Log</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>STP Daily Operation Logsheet</h1>
+
+<div class="container">
+  <form id="stpForm">
+
+    <h2>Operator Details</h2>
+    <div class="form-group">
+      <label>Operator Name</label>
+      <input id="operatorName" required>
+    </div>
+    <div class="form-group">
+      <label>Site Name</label>
+      <input id="siteName" required>
+    </div>
+    <div class="form-group">
+      <label>Shift Details</label>
+      <select id="shiftDetails" required>
+        <option value="">Select Shift</option>
+        <option value="1">Shift-1</option>
+        <option value="2">Shift-2</option>
+        <option value="3">Shift-3</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" id="date" required>
+    </div>
+    <div class="form-group">
+      <label>Time</Time></label>
+      <input type="time" id="time" required>
+    </div>
+
+    <h2>STP Parameters</h2>
+    <div class="form-group">
+      <label>Inlet Flow (m³/hr)</label>
+      <input type="number" id="inletFlow">
+    </div>
+    <div class="form-group">
+      <label>Outlet Flow (m³/hr)</label>
+      <input type="number" id="outletFlow">
+    </div>
+    <div class="form-group">
+      <label>SV30 (ml/l)</label>
+      <input type="number" id="sv30">
+    </div>
+    <div class="form-group">
+      <label>COD (mg/l)</label>
+      <input type="number" id="cod">
+    </div>
+    <div class="form-group">
+      <label>DO (mg/l)</label>
+      <input type="number" id="do">
+    </div>
+    <div class="form-group">
+      <label>pH</label>
+      <input type="number" step="0.1" id="ph">
+    </div>
+
+    <button type="submit">Add Entry</button>
+  </form>
+
+  <table id="logTable">
+    <thead>
+      <tr>
+        <th>Date</th><th>Time</th><th>Operator</th><th>Site</th><th>Shift</th>
+        <th>Inlet</th><th>Outlet</th><th>SV30</th><th>COD</th><th>DO</th><th>pH</th><th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="actions">
+    <button onclick="exportExcel()">Export to Excel</button>
+    <button onclick="exportPDF()">Export to PDF</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
