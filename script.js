@@ -1,6 +1,33 @@
 const form = document.getElementById("stpForm");
 const tableBody = document.querySelector("#logTable tbody");
 
+function addRowToTable(rowData) {
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${rowData[0]}</td>
+    <td>${rowData[1]}</td>
+    <td>${rowData[2]}</td>
+    <td>${rowData[3]}</td>
+    <td>${rowData[4]}</td>
+    <td>${rowData[5]}</td>
+    <td>${rowData[6]}</td>
+    <td>${rowData[7]}</td>
+    <td>${rowData[8]}</td>
+    <td>${rowData[9]}</td>
+    <td>${rowData[10]}</td>
+    <td><button class="delete-btn">Delete</button></td>
+  `;
+
+  row.querySelector(".delete-btn").addEventListener("click", () => {
+    if (confirm("Delete only removes from screen, not from Google Sheet")) {
+      row.remove();
+    }
+  });
+
+  tableBody.appendChild(row);
+}
+
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -75,11 +102,36 @@ row.querySelector(".delete-btn").addEventListener("click", function () {
 });
 
 function exportExcel() {
-  const table = document.getElementById("logTable").outerHTML;
-  const url = 'data:application/vnd.ms-excel,' + encodeURIComponent(table);
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
+
+  if (!startDate || !endDate) {
+    alert("Please select start date and end date");
+    return;
+  }
+
+  const table = document.getElementById("logTable");
+  const rows = table.querySelectorAll("tbody tr");
+
+  let filteredTable = `
+    <table border="1">
+      <tr>${table.querySelector("thead tr").innerHTML}</tr>
+  `;
+
+  rows.forEach(row => {
+    const rowDate = row.cells[0].innerText; // Date column
+
+    if (rowDate >= startDate && rowDate <= endDate) {
+      filteredTable += `<tr>${row.innerHTML}</tr>`;
+    }
+  });
+
+  filteredTable += "</table>";
+
+  const url = 'data:application/vnd.ms-excel,' + encodeURIComponent(filteredTable);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "STP_Daily_Log.xls";
+  a.download = `STP_Log_${startDate}_to_${endDate}.xls`;
   a.click();
 }
 
@@ -90,3 +142,11 @@ function exportPDF() {
   win.document.close();
   win.print();
 }
+window.addEventListener("load", function () {
+  fetch("https://script.google.com/macros/s/AKfycbxgo5nn24O5Lsqe3nzyhA3ncoRD-NT-LMj3KwjbtwmzvF2Bcnh0oUwi511J5wAKwGNn-A/exec")
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(row => addRowToTable(row));
+    })
+    .catch(err => console.error("Error loading data", err));
+});
