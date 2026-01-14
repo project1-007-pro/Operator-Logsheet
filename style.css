@@ -1,15 +1,14 @@
 /* ===== Brand Variables ===== */
 :root {
-  --brand-primary: #6a11cb;
-  --brand-secondary: #2575fc;
+  --brand-primary: #7469c6;
+  --brand-secondary: #e1c4f5;
+  --brand-tertiary: #a8dad9;
   --bg-dark: #0f172a;
   --bg-light: #f8fafc;
   --card-bg: #ffffff;
   --text-dark: #0f172a;
   --text-muted: #64748b;
   --border-light: #e2e8f0;
-  --success: #22c55e;
-  --danger: #ef4444;
 }
 
 /* ===== Global Reset ===== */
@@ -21,8 +20,8 @@
 
 body {
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-  min-height: 100vh;
+  background: linear-gradient(45deg, var(--brand-primary),var(--brand-secondary) ,var(--brand-tertiary));
+  min-height: 150vh;
   padding: 40px 20px;
   color: var(--text-dark);
 }
@@ -32,7 +31,7 @@ h1 {
   text-align: center;
   font-size: 2.4rem;
   font-weight: 700;
-  color: #fff;
+  color: #000000;
   margin-bottom: 30px;
   letter-spacing: 0.5px;
 }
@@ -51,7 +50,7 @@ h1 {
 h2 {
   font-size: 1.2rem;
   margin: 25px 0 15px;
-  color: var(--brand-primary);
+  color: #0c0a1d;
   border-left: 4px solid var(--brand-primary);
   padding-left: 10px;
 }
@@ -67,7 +66,7 @@ h2 {
 
 label {
   font-weight: 600;
-  color: var(--text-muted);
+  color: #0f172a;
 }
 
 /* ===== Inputs ===== */
@@ -90,7 +89,7 @@ select:focus {
 
 /* ===== Primary Button ===== */
 button {
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  background: #000000;
   color: #fff;
   border: none;
   border-radius: 12px;
